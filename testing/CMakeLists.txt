@@ -18,6 +18,7 @@ add_executable(tests ${SRCS})
 
 target_link_libraries(tests
     CED_decoder_app
+    Chardet_decoder_app
     gtest 
     gtest_main
 )
