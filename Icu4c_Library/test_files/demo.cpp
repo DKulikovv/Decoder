@@ -2,7 +2,7 @@
 
 int main() {
 
-  Decoder d;
+  ICU_Decoder d;
 
   d.Decode("../test_files/big5.txt");
   d.Decode("../test_files/iso-8859-5.txt");

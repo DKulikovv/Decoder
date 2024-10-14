@@ -1,6 +1,7 @@
 #include "../CED_Decoder_App/DecoderApp.h"
 #include "../Chardet_Library/src/chardet.h"
 #include "../Uchardet_Library/src/uchardet.h"
+#include "../Icu4c_Library/src/general_decoder.hpp"
 #include "gtest/gtest.h"
 
 #include <vector>

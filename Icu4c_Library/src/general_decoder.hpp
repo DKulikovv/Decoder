@@ -2,7 +2,7 @@
 
 #include "icu_decoder_impl.hpp"
 
-class Decoder {
+class ICU_Decoder {
 public:
 
   void Decode(const char * path) {
