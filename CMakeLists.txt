@@ -52,6 +52,7 @@ add_subdirectory(CED_Library)
 add_subdirectory(CED_Decoder_App)
 add_subdirectory(Chardet_Library)
 add_subdirectory(Chardet_Decoder_App)
+add_subdirectory(Uchardet_Library)
 add_subdirectory(testing)
 
 message("\nConfiguration completed.  Open the created projects with Visual Studio to build the packages.\n")

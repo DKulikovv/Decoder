@@ -1,4 +1,6 @@
 #include "../CED_Decoder_App/DecoderApp.h"
+#include "../Chardet_Library/src/chardet.h"
+#include "../Uchardet_Library/src/uchardet.h"
 #include "gtest/gtest.h"
 
 #include <vector>
