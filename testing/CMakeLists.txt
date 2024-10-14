@@ -20,6 +20,7 @@ target_link_libraries(tests
     CED_decoder_app
     Chardet_decoder_app
     Uchardet_decoder_lib
+	Icu4c_decoder_lib
     gtest 
     gtest_main
 )
