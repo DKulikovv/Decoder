@@ -17,10 +17,10 @@ file(GLOB SRCS *.cpp)
 add_executable(tests ${SRCS})
 
 target_link_libraries(tests
-    CED_decoder_app
-    Chardet_decoder_app
+    CED_decoder_lib
+    Chardet_decoder_lib
     Uchardet_decoder_lib
-	Icu4c_decoder_lib
+    Icu4c_decoder_lib
     gtest 
     gtest_main
 )
