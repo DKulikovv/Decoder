@@ -14,7 +14,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E tar x ${CMAKE_CURRENT_SOURCE_DIR}/fi
 
 file(GLOB SRCS *.cpp)
 
-add_executable(tests ${SRCS} common_decoders.h)
+add_executable(tests ${SRCS} common_decoders.h gtest_ext_combine.h)
 
 target_link_libraries(tests
     CED_decoder_lib
