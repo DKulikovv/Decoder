@@ -26,6 +26,22 @@ struct DecodeParam {
         return DecodeParam(std::get<0>(t), std::get<1>(t));
     }
 
+    void checkResult(int& decoderResult) const {
+        auto it = find(encodings.begin(), encodings.end(), source);
+        int extected_result = it - encodings.begin();
+        auto fupper = cfile;
+        transform(fupper.begin(), fupper.end(), fupper.begin(), ::toupper);
+        auto point = fupper.find(".");
+        ASSERT_NE(point, std::string::npos);
+        auto ss = (fupper.substr(0, point).compare(source)) == 0 ? true : false;
+        if (ss) {
+            ASSERT_EQ(extected_result, decoderResult) << "extected_result = " << extected_result << "(" << encodings.at(extected_result) << ") result = " << decoderResult << "(" << encodings.at(decoderResult) << ")" << '\n';
+        }
+        else {
+            ASSERT_NE(extected_result, decoderResult) << "Encoding shouldn't be detected. Try to detect " << encodings.at(extected_result) << " in " << fupper.substr(0, point) << " file, but it detected as " << encodings.at(decoderResult) << '\n';
+        }
+    }
+
 private:
     std::string getCurrentDirectory() {
         const size_t size = 1024;
@@ -41,78 +57,25 @@ class DecodeTestSuite : public ::testing::TestWithParam<DecodeParam> {
 TEST_P(DecodeTestSuite, DecodeCompactEncDetTest) {
     const auto& param = GetParam();
     auto result = decode<TestCompactEncDet>(loadFile(param.filePath));
-
-    auto it = find(encodings.begin(), encodings.end(), param.source);
-    int extected_result = it - encodings.begin();
-    auto fupper = param.cfile;
-    transform(fupper.begin(), fupper.end(), fupper.begin(), ::toupper);
-    auto point = fupper.find(".");
-    ASSERT_NE(point, std::string::npos);
-    auto ss = (fupper.substr(0, point).compare(param.source)) == 0 ? true : false;
-    if (ss) {
-        ASSERT_EQ(extected_result, result) << "extected_result = " << extected_result << "(" << encodings.at(extected_result) << ") result = " << result << "(" << encodings.at(result) << ")" << '\n';
-    }
-    else {
-        ASSERT_NE(extected_result, result) << "Encoding shouldn't be detected. Try to detect " << encodings.at(extected_result) << " in " << fupper.substr(0, point) << " file, but it detected as " << encodings.at(result) << '\n';
-    }
+    ASSERT_NO_FATAL_FAILURE(param.checkResult(result));
 }
 
 TEST_P(DecodeTestSuite, DecodeChardetTest) {
     const auto& param = GetParam();
     auto result = decode<TestChardet>(loadFile(param.filePath));
-    
-    auto it = find(encodings.begin(), encodings.end(), param.source);
-    int extected_result = it - encodings.begin();
-    auto fupper = param.cfile;
-    transform(fupper.begin(), fupper.end(), fupper.begin(), ::toupper);
-    auto point = fupper.find(".");
-    ASSERT_NE(point, std::string::npos);
-    auto ss = (fupper.substr(0, point).compare(param.source)) == 0 ? true : false;
-    if (ss) {
-        ASSERT_EQ(extected_result, result) << "extected_result = " << extected_result << "(" << encodings.at(extected_result) << ") result = " << result << "(" << encodings.at(result) << ")" << '\n';
-    }
-    else {
-        ASSERT_NE(extected_result, result) << "Encoding shouldn't be detected. Try to detect " << encodings.at(extected_result) << " in " << fupper.substr(0, point) << " file, but it detected as " << encodings.at(result) << '\n';
-    }
+    ASSERT_NO_FATAL_FAILURE(param.checkResult(result));
 }
 
 TEST_P(DecodeTestSuite, DecodeUchardetTest) {
     const auto& param = GetParam();
     auto result = decode<TestUChardet>(loadFile(param.filePath));
-    
-    auto it = find(encodings.begin(), encodings.end(), param.source);
-    int extected_result = it - encodings.begin();
-    auto fupper = param.cfile;
-    transform(fupper.begin(), fupper.end(), fupper.begin(), ::toupper);
-    auto point = fupper.find(".");
-    ASSERT_NE(point, std::string::npos);
-    auto ss = (fupper.substr(0, point).compare(param.source)) == 0 ? true : false;
-    auto s = fupper.substr(0, point);
-    if (ss) {
-        ASSERT_EQ(extected_result, result) << "extected_result = " << "( " << encodings.at(extected_result) << ") result = " << result << "(" << encodings.at(result) << ")" << '\n';
-    }
-    else {
-        ASSERT_NE(extected_result, result) << "Encoding shouldn't be detected. Try to detect " << encodings.at(extected_result) << " in " << fupper.substr(0, point) << " file, but it detected as " << encodings.at(result) << '\n';
-    }
+    ASSERT_NO_FATAL_FAILURE(param.checkResult(result));
 }
 
 //TEST_P(DecodeTestSuite, DecodeIcu4cTest) {
 //    const auto& param = GetParam();
 //    auto result = decode<TestIcu4c>(loadFile(param.filePath));
-//
-//    auto it = find(encodings.begin(), encodings.end(), param.source);
-//    int extected_result = it - encodings.begin();
-//    auto fupper = param.cfile;
-//    transform(fupper.begin(), fupper.end(), fupper.begin(), ::toupper);
-//    auto point = fupper.find(".");
-//    ASSERT_NE(point, std::string::npos);
-//    auto ss = (fupper.substr(0, point).compare(param.source)) == 0 ? true : false;
-//    if (ss) {
-//        ASSERT_EQ(extected_result, result) << "extected_result = " << extected_result << "(" << encodings.at(extected_result) << ") result = " << result << "(" << encodings.at(result) << ")" << '\n';
-//    }
-//    else {
-//        ASSERT_NE(extected_result, result) << "Encoding shouldn't be detected. Try to detect " << encodings.at(extected_result) << " in " << fupper.substr(0, point) << " file, but it detected as " << encodings.at(result) << '\n';
-//    }
+//    ASSERT_NO_FATAL_FAILURE(param.checkResult(result));
 //}
 
 INSTANTIATE_TEST_CASE_P(Decode, DecodeTestSuite, google_combine::fromTuple(::testing::Combine(
