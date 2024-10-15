@@ -64,7 +64,7 @@ set(
 	nsLanguageDetector.cpp
 	nsCJKDetector.cpp
 	nsLatin1Prober.cpp
-	nsUniversalDetector.cpp
+        nsUniversalDetector.cpp
 	uchardet.cpp
 )
 

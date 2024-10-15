@@ -61,10 +61,10 @@ typedef enum {
                        NS_FILTER_JAPANESE | \
                        NS_FILTER_KOREAN)
 
-class nsUniversalDetector {
+class nsUniversalDetectorUchardet {
 public:
-   nsUniversalDetector(PRUint32 aLanguageFilter);
-   virtual ~nsUniversalDetector();
+    nsUniversalDetectorUchardet(PRUint32 aLanguageFilter);
+   virtual ~nsUniversalDetectorUchardet();
    virtual nsresult HandleData(const char* aBuf, PRUint32 aLen);
    virtual void DataEnd(void);
 

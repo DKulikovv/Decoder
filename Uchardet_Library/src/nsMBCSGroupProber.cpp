@@ -40,7 +40,7 @@
 
 #include "nsCJKDetector.h"
 #include "nsMBCSGroupProber.h"
-#include "nsUniversalDetector.h"
+#include "../../Chardet_Library/src/nsUniversalDetector.h"
 
 #if defined(DEBUG_chardet) || defined(DEBUG_jgmyers)
 const char *ProberName[] = 

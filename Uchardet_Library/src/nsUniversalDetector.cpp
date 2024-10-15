@@ -45,7 +45,7 @@
 #include "nsEscCharsetProber.h"
 #include "nsLatin1Prober.h"
 
-nsUniversalDetector::nsUniversalDetector(PRUint32 aLanguageFilter)
+nsUniversalDetectorUchardet::nsUniversalDetectorUchardet(PRUint32 aLanguageFilter)
 {
   mNbspFound = PR_FALSE;
   mDone = PR_FALSE;
@@ -68,7 +68,7 @@ nsUniversalDetector::nsUniversalDetector(PRUint32 aLanguageFilter)
     mCharSetProbers[i] = nsnull;
 }
 
-nsUniversalDetector::~nsUniversalDetector()
+nsUniversalDetectorUchardet::~nsUniversalDetectorUchardet()
 {
   for (PRInt32 i = 0; i < NUM_OF_CHARSET_PROBERS; i++)
     delete mCharSetProbers[i];
@@ -77,7 +77,7 @@ nsUniversalDetector::~nsUniversalDetector()
 }
 
 void
-nsUniversalDetector::Reset()
+nsUniversalDetectorUchardet::Reset()
 {
   mNbspFound = PR_FALSE;
   mDone = PR_FALSE;
@@ -106,7 +106,7 @@ nsUniversalDetector::Reset()
 #define SHORTCUT_THRESHOLD      (float)0.95
 #define MINIMUM_THRESHOLD      (float)0.20
 
-nsresult nsUniversalDetector::HandleData(const char* aBuf, PRUint32 aLen)
+nsresult nsUniversalDetectorUchardet::HandleData(const char* aBuf, PRUint32 aLen)
 {
   if(mDone)
     return NS_OK;
@@ -290,7 +290,7 @@ nsresult nsUniversalDetector::HandleData(const char* aBuf, PRUint32 aLen)
 
 
 //---------------------------------------------------------------------
-void nsUniversalDetector::DataEnd()
+void nsUniversalDetectorUchardet::DataEnd()
 {
   if (!mGotData)
   {

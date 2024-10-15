@@ -37,7 +37,7 @@
 
 
 #include "nsEscCharsetProber.h"
-#include "nsUniversalDetector.h"
+#include "../../Chardet_Library/src/nsUniversalDetector.h"
 
 nsEscCharSetProber::nsEscCharSetProber(PRUint32 aLanguageFilter)
 {

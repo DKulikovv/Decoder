@@ -50,7 +50,7 @@ typedef struct _UChardetCandidate
     float  confidence;
 } UChardetCandidate;
 
-class HandleUniversalDetector : public nsUniversalDetector
+class HandleUniversalDetector : public nsUniversalDetectorUchardet
 {
 protected:
     std::vector<UChardetCandidate> candidates;
@@ -60,7 +60,7 @@ protected:
 
 public:
     HandleUniversalDetector()
-    : nsUniversalDetector(NS_FILTER_ALL), default_weight(1.0)
+    : nsUniversalDetectorUchardet(NS_FILTER_ALL), default_weight(1.0)
     {
     }
 
@@ -116,7 +116,7 @@ public:
     {
         std::vector<UChardetCandidate>::iterator it;
 
-        nsUniversalDetector::Reset();
+        nsUniversalDetectorUchardet::Reset();
         for (it = candidates.begin(); it != candidates.end(); it++)
         {
             free(it->encoding);
